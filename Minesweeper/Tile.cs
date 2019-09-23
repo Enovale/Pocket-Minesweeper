@@ -14,7 +14,7 @@ namespace Minesweeper {
 
         public bool bomb;
 
-        public bool revealed;
+        public int state;
         public int value;
 
 	    public Tile(bool bomb, int x, int y)
@@ -29,29 +29,101 @@ namespace Minesweeper {
             this.Size = new Size(this.Width, this.Height);
 
             this.bomb = bomb;
+            this.state = (int)TileState.Empty;
 	    }
+
+        public void DetermineValue()
+        {
+            for (int ny = 0; ny < 3; ny++)
+            {
+                for (int nx = 0; nx < 3; nx++)
+                {
+                    int xToCheck = (this.x + 1) - nx;
+                    int yToCheck = (this.y + 1) - ny;
+                    if (xToCheck == this.x && yToCheck == this.y) continue;
+                    if (xToCheck < 0 || xToCheck >= Minesweep.Instance.tileArray.GetLength(0)) continue;
+                    if (yToCheck < 0 || yToCheck >= Minesweep.Instance.tileArray.GetLength(1)) continue;
+                    if (Minesweep.Instance.tileArray[xToCheck, yToCheck].bomb)
+                    {
+                        this.value += 1;
+                    }
+                }
+            }
+        }
 
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
-            // Declare and instantiate a new pen.  
-            using (System.Drawing.Brush myPen = new System.Drawing.SolidBrush(CurrentBackColor))
-            {
-                // Draw an aqua rectangle in the rectangle represented by the control.  
-                e.Graphics.FillRectangle(myPen, new Rectangle(0, 0, this.Size.Width, this.Size.Height));
-                e.Graphics.DrawString(this.x.ToString() + " " + this.Width, this.Font, new System.Drawing.SolidBrush(Color.Black), 0, 0);
+
+            // Create rectangle for source image.
+            Rectangle srcRect = new Rectangle(0, 0, this.Size.Width, this.Size.Height);
+            Image bg;
+            switch(state) {
+                case (int)TileState.Empty:
+                    Bitmap emptyBG = Minesweeper.Properties.Resources.empty;
+                    bg = Image.FromHbitmap(emptyBG.GetHbitmap());
+                    break;
+                case (int)TileState.Flagged:
+                    Bitmap mineBG = Minesweeper.Properties.Resources.flag;
+                    bg = Image.FromHbitmap(mineBG.GetHbitmap());
+                    break;
+                case (int)TileState.Question:
+                    Bitmap questionBG = Minesweeper.Properties.Resources.flag;
+                    bg = Image.FromHbitmap(questionBG.GetHbitmap());
+                    break;
+                case (int)TileState.Clicked:
+                    Bitmap clickedBG;
+                    switch(value) {
+                        case 0:
+                            clickedBG = Minesweeper.Properties.Resources.emptyClicked;
+                            break;
+                        case 1:
+                            clickedBG = Minesweeper.Properties.Resources._1;
+                            break;
+                        case 2:
+                            clickedBG = Minesweeper.Properties.Resources._2;
+                            break;
+                        case 3:
+                            clickedBG = Minesweeper.Properties.Resources._3;
+                            break;
+                        case 4:
+                            clickedBG = Minesweeper.Properties.Resources._4;
+                            break;
+                        case 5:
+                            clickedBG = Minesweeper.Properties.Resources._5;
+                            break;
+                        case 6:
+                            clickedBG = Minesweeper.Properties.Resources._6;
+                            break;
+                        case 7:
+                            clickedBG = Minesweeper.Properties.Resources._7;
+                            break;
+                        case 8:
+                            clickedBG = Minesweeper.Properties.Resources._8;
+                            break;
+                        default:
+                            clickedBG = Minesweeper.Properties.Resources.emptyClicked;
+                            break;
+                    }
+                    bg = Image.FromHbitmap(clickedBG.GetHbitmap());
+                    break;
+                default:
+                    Bitmap defaultBG = Minesweeper.Properties.Resources.empty;
+                    bg = Image.FromHbitmap(defaultBG.GetHbitmap());
+                    break;
             }
+            e.Graphics.DrawImage(bg, srcRect, new Rectangle(0, 0, bg.Width, bg.Height), GraphicsUnit.Pixel);
         }
 
-        protected override void OnMouseDown(MouseEventArgs mevent)
+        protected override void OnClick(EventArgs e)
         {
-            base.OnMouseDown(mevent);
-            Invalidate();
+            base.OnClick(e);
+            Minesweep.Instance.TileClick(this.x, this.y);
         }
 
-        protected override void OnMouseUp(MouseEventArgs mevent)
+        protected override void OnDoubleClick(EventArgs e)
         {
-            base.OnMouseUp(mevent);
+            base.OnDoubleClick(e);
             Invalidate();
         }
     }

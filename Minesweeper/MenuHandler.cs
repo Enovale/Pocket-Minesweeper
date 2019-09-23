@@ -14,7 +14,7 @@ public class MenuHandler
 
     public void RunGame()
     {
-        Game f = new Game(menuForm.difficulty.SelectedText);
+        Game f = new Game(menuForm.difficulty.SelectedIndex);
         f.Show();
     }
 }

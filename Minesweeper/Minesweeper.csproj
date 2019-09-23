@@ -56,6 +56,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="TileStates.cs" />
     <Compile Include="Difficulty.cs" />
     <Compile Include="Menu.cs">
       <SubType>Form</SubType>
@@ -89,10 +90,27 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Tile.cs">
       <SubType>Component</SubType>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\1.jpg" />
+    <None Include="Images\2.jpg" />
+    <None Include="Images\3.jpg" />
+    <None Include="Images\4.jpg" />
+    <None Include="Images\5.jpg" />
+    <None Include="Images\6.jpg" />
+    <None Include="Images\7.jpg" />
+    <None Include="Images\8.jpg" />
+    <Content Include="Images\empty.jpg" />
+    <Content Include="Images\emptyClicked.jpg" />
+    <Content Include="Images\flag.jpg" />
+    <None Include="Images\mineRed.jpg" />
+    <None Include="Images\mine.jpg" />
+    <None Include="Images\flagClicked.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CompactFramework.CSharp.targets" />
   <ProjectExtensions>

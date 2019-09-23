@@ -1,11 +1,11 @@
 ﻿using System;
 
-namespace Minesweaper
+namespace Minesweeper
 {
     public enum Difficulty
     {
-        Beginner = 9,
-        Intermediate = 16,
-        Advanced = 20
+        Beginner = 0,
+        Intermediate = 1,
+        Advanced = 2
     }
 }

@@ -28,8 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Game));
             this.label1 = new System.Windows.Forms.Label();
             this.gamePanel = new System.Windows.Forms.Panel();
+            this.flagButton = new System.Windows.Forms.PictureBox();
             this.SuspendLayout();
             // 
             // label1
@@ -45,12 +47,22 @@
             this.gamePanel.Name = "gamePanel";
             this.gamePanel.Size = new System.Drawing.Size(234, 243);
             // 
+            // flagButton
+            // 
+            this.flagButton.Image = ((System.Drawing.Image)(resources.GetObject("flagButton.Image")));
+            this.flagButton.Location = new System.Drawing.Point(195, 3);
+            this.flagButton.Name = "flagButton";
+            this.flagButton.Size = new System.Drawing.Size(42, 42);
+            this.flagButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.flagButton.Click += new System.EventHandler(this.flagButton_Click);
+            // 
             // Game
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(240, 294);
+            this.Controls.Add(this.flagButton);
             this.Controls.Add(this.gamePanel);
             this.Controls.Add(this.label1);
             this.Name = "Game";
@@ -63,6 +75,7 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel gamePanel;
+        private System.Windows.Forms.PictureBox flagButton;
     }
 }
 

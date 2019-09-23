@@ -16,12 +16,17 @@ namespace Minesweeper
         public Panel boardPanel;
         public Label debugLabel;
 
-        public Game(string difficulty)
+        public Game(int difficulty)
         {
             InitializeComponent();
             boardPanel = this.gamePanel;
             debugLabel = this.label1;
             mineRef = new Minesweep(this, difficulty);
+        }
+
+        private void flagButton_Click(object sender, EventArgs e)
+        {
+            mineRef.FlagBtnClick((PictureBox)sender);
         }
     }
 }
