@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Drawing;
 
@@ -30,10 +32,24 @@ namespace Minesweeper {
 
             this.bomb = bomb;
             this.state = (int)TileState.Empty;
+            this.value = 0;
 	    }
 
         public void DetermineValue()
         {
+            List<Tile> neighbors = GetNeighbors();
+            for (int i = 0; i < neighbors.Count; i++)
+            {
+                if (neighbors[i].bomb)
+                {
+                    this.value += 1;
+                }
+            }
+        }
+
+        public List<Tile> GetNeighbors()
+        {
+            List<Tile> array = new List<Tile>();
             for (int ny = 0; ny < 3; ny++)
             {
                 for (int nx = 0; nx < 3; nx++)
@@ -43,12 +59,10 @@ namespace Minesweeper {
                     if (xToCheck == this.x && yToCheck == this.y) continue;
                     if (xToCheck < 0 || xToCheck >= Minesweep.Instance.tileArray.GetLength(0)) continue;
                     if (yToCheck < 0 || yToCheck >= Minesweep.Instance.tileArray.GetLength(1)) continue;
-                    if (Minesweep.Instance.tileArray[xToCheck, yToCheck].bomb)
-                    {
-                        this.value += 1;
-                    }
+                    array.Add(Minesweep.Instance.tileArray[xToCheck, yToCheck]);
                 }
             }
+            return array;
         }
 
         protected override void OnPaint(PaintEventArgs e)
@@ -58,6 +72,16 @@ namespace Minesweeper {
             // Create rectangle for source image.
             Rectangle srcRect = new Rectangle(0, 0, this.Size.Width, this.Size.Height);
             Image bg;
+            if (Minesweep.debug)
+            {
+                if (this.bomb)
+                {
+                    Bitmap questionBG = Minesweeper.Properties.Resources.flag;
+                    bg = Image.FromHbitmap(questionBG.GetHbitmap());
+                    e.Graphics.DrawImage(bg, srcRect, new Rectangle(0, 0, bg.Width, bg.Height), GraphicsUnit.Pixel);
+                    return;
+                }
+            }
             switch(state) {
                 case (int)TileState.Empty:
                     Bitmap emptyBG = Minesweeper.Properties.Resources.empty;

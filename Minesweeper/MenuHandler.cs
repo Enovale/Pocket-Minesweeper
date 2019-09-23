@@ -15,6 +15,8 @@ public class MenuHandler
     public void RunGame()
     {
         Game f = new Game(menuForm.difficulty.SelectedIndex);
+        f.Closed += (s, args) => menuForm.Close();
         f.Show();
+        menuForm.Hide();
     }
 }

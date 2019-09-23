@@ -1,10 +1,15 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Drawing;
 using Minesweeper;
 
 public class Minesweep
 {
+
+    public static bool debug = false;
+
     public static Minesweep Instance;
     public Random random = new Random();
     public Game gameForm;
@@ -130,6 +135,7 @@ public class Minesweep
     private void MoveBombAway(int x, int y)
     {
         tileArray[x, y].state = (int)TileState.Empty;
+        tileArray[x, y].bomb = false;
         int randX = RandomNumber(0, gameWidth);
         int randY = RandomNumber(0, gameHeight);
         tileArray[randX, randY].Invalidate();
@@ -178,12 +184,20 @@ public class Minesweep
         bool nothing = firstClick;
         if (firstClick)
         {
+            List<Tile> neighbors = tileObj.GetNeighbors();
+            for (int i = 0; i < neighbors.Count; i++)
+            {
+                if (neighbors[i].bomb == true)
+                {
+                    MoveBombAway(neighbors[i].x, neighbors[i].y);
+                }
+            }
             if (tileObj.bomb)
             {
                 MoveBombAway(x, y);
             }
-            firstClick = false;
             CalcValues();
+            firstClick = false;
             TileClick(x, y);
             return;
         }
@@ -191,7 +205,11 @@ public class Minesweep
         {
             switch (tileObj.state)
             {
-                //case 
+                case (int)TileState.Empty:
+                    tileObj.state = (int)TileState.Flagged;
+                    break;
+                default:
+                    break;
             }
         }
         else
@@ -200,11 +218,15 @@ public class Minesweep
             {
                 // die
                 Death();
+            }
+            else if (tileObj.state == (int)TileState.Clicked)
+            {
                 return;
             }
             else
             {
                 tileObj.state = (int)TileState.Clicked;
+                if (tileObj.value == 0) OpenRegion(tileObj.x, tileObj.y);
             }
         }
         tileObj.Invalidate();
@@ -212,11 +234,21 @@ public class Minesweep
 
     public void OpenRegion(int x, int y)
     {
-        // stub
+        Tile tileObj = tileArray[x, y];
+        List<Tile> neighbors = tileObj.GetNeighbors();
+        gameForm.debugLabel.Text = neighbors.Count.ToString();
+        int test = 0;
+        for (int i = 0; i < neighbors.Count; i++)
+        {
+            test++;
+            gameForm.debugLabel.Text += " (" + neighbors[i].x.ToString() + ", " + neighbors[i].y.ToString() + ", " + neighbors[i].bomb.ToString() + ")";
+            TileClick(neighbors[i].x, neighbors[i].y);
+        }
     }
 
     public void Death()
     {
-        gameForm.Close();
+        gameForm.debugLabel.Text = "died";
+        //gameForm.Close();
     }
 }
