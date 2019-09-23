@@ -9,6 +9,7 @@ namespace Minesweeper
         Mine = 1,
         Flagged = 2,
         Question = 3,
-        Clicked = 4
+        Clicked = 4,
+        BlewUp = 5
     }
 }

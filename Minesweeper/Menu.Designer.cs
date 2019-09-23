@@ -28,15 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Menu));
             this.button1 = new System.Windows.Forms.Button();
             this.difficultyBox = new System.Windows.Forms.ComboBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.logoLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(79, 228);
+            this.button1.Location = new System.Drawing.Point(84, 220);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(72, 20);
             this.button1.TabIndex = 0;
@@ -48,18 +47,19 @@
             this.difficultyBox.Items.Add("Beginner");
             this.difficultyBox.Items.Add("Intermediate");
             this.difficultyBox.Items.Add("Advanced");
-            this.difficultyBox.Location = new System.Drawing.Point(64, 200);
+            this.difficultyBox.Location = new System.Drawing.Point(70, 246);
             this.difficultyBox.Name = "difficultyBox";
-            this.difficultyBox.Size = new System.Drawing.Size(100, 26);
+            this.difficultyBox.Size = new System.Drawing.Size(100, 22);
             this.difficultyBox.TabIndex = 1;
             // 
-            // pictureBox1
+            // logoLabel
             // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(98, 117);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(53, 53);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.logoLabel.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Regular);
+            this.logoLabel.Location = new System.Drawing.Point(0, 24);
+            this.logoLabel.Name = "logoLabel";
+            this.logoLabel.Size = new System.Drawing.Size(240, 45);
+            this.logoLabel.Text = "Minesweeper";
+            this.logoLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // Menu
             // 
@@ -67,7 +67,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(240, 294);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.logoLabel);
             this.Controls.Add(this.difficultyBox);
             this.Controls.Add(this.button1);
             this.KeyPreview = true;
@@ -82,6 +82,6 @@
 
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ComboBox difficultyBox;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label logoLabel;
     }
 }

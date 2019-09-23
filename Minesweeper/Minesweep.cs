@@ -175,6 +175,14 @@ public class Minesweep
         }
     }
 
+    public void SmileClick(PictureBox smileObj)
+    {
+        Minesweeper.Menu f = new Minesweeper.Menu();
+        f.Closed += (s, args) => gameForm.Close();
+        f.Show();
+        gameForm.Hide();
+    }
+
     /// <summary>
     /// Upon clicking a tile
     /// </summary>
@@ -217,6 +225,8 @@ public class Minesweep
             if (tileObj.bomb)
             {
                 // die
+                tileObj.state = (int)TileState.BlewUp;
+                tileObj.Invalidate();
                 Death();
             }
             else if (tileObj.state == (int)TileState.Clicked)

@@ -88,12 +88,20 @@ namespace Minesweeper {
                     bg = Image.FromHbitmap(emptyBG.GetHbitmap());
                     break;
                 case (int)TileState.Flagged:
-                    Bitmap mineBG = Minesweeper.Properties.Resources.flag;
-                    bg = Image.FromHbitmap(mineBG.GetHbitmap());
+                    Bitmap flagBG = Minesweeper.Properties.Resources.flag;
+                    bg = Image.FromHbitmap(flagBG.GetHbitmap());
                     break;
                 case (int)TileState.Question:
-                    Bitmap questionBG = Minesweeper.Properties.Resources.flag;
+                    Bitmap questionBG = Minesweeper.Properties.Resources.question;
                     bg = Image.FromHbitmap(questionBG.GetHbitmap());
+                    break;
+                case (int)TileState.Mine:
+                    Bitmap mineBG = Minesweeper.Properties.Resources.mine;
+                    bg = Image.FromHbitmap(mineBG.GetHbitmap());
+                    break;
+                case (int)TileState.BlewUp:
+                    Bitmap blewBG = Minesweeper.Properties.Resources.mineRed;
+                    bg = Image.FromHbitmap(blewBG.GetHbitmap());
                     break;
                 case (int)TileState.Clicked:
                     Bitmap clickedBG;

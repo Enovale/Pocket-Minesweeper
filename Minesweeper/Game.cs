@@ -15,18 +15,25 @@ namespace Minesweeper
         public Minesweep mineRef;
         public Panel boardPanel;
         public Label debugLabel;
+        public PictureBox smileBtn;
 
         public Game(int difficulty)
         {
             InitializeComponent();
             boardPanel = this.gamePanel;
             debugLabel = this.label1;
+            smileBtn = this.smileButton;
             mineRef = new Minesweep(this, difficulty);
         }
 
         private void flagButton_Click(object sender, EventArgs e)
         {
             mineRef.FlagBtnClick((PictureBox)sender);
+        }
+
+        private void smileButton_Click(object sender, EventArgs e)
+        {
+            mineRef.SmileClick((PictureBox)sender);
         }
     }
 }

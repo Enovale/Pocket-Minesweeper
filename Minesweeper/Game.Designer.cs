@@ -32,14 +32,16 @@
             this.label1 = new System.Windows.Forms.Label();
             this.gamePanel = new System.Windows.Forms.Panel();
             this.flagButton = new System.Windows.Forms.PictureBox();
+            this.smileButton = new System.Windows.Forms.PictureBox();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.Location = new System.Drawing.Point(0, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(189, 45);
+            this.label1.Size = new System.Drawing.Size(45, 45);
             this.label1.Text = "label1";
+            this.label1.Visible = false;
             // 
             // gamePanel
             // 
@@ -56,12 +58,22 @@
             this.flagButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.flagButton.Click += new System.EventHandler(this.flagButton_Click);
             // 
+            // smileButton
+            // 
+            this.smileButton.Image = ((System.Drawing.Image)(resources.GetObject("smileButton.Image")));
+            this.smileButton.Location = new System.Drawing.Point(99, 3);
+            this.smileButton.Name = "smileButton";
+            this.smileButton.Size = new System.Drawing.Size(42, 42);
+            this.smileButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.smileButton.Click += new System.EventHandler(this.smileButton_Click);
+            // 
             // Game
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(240, 294);
+            this.Controls.Add(this.smileButton);
             this.Controls.Add(this.flagButton);
             this.Controls.Add(this.gamePanel);
             this.Controls.Add(this.label1);
@@ -76,6 +88,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel gamePanel;
         private System.Windows.Forms.PictureBox flagButton;
+        private System.Windows.Forms.PictureBox smileButton;
     }
 }
 
