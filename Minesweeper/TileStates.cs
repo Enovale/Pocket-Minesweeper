@@ -10,6 +10,7 @@ namespace Minesweeper
         Flagged = 2,
         Question = 3,
         Clicked = 4,
-        BlewUp = 5
+        BlewUp = 5,
+        NotMine = 6
     }
 }

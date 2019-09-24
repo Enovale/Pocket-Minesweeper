@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 
 namespace Minesweeper {
 
@@ -99,6 +100,10 @@ namespace Minesweeper {
                     Bitmap mineBG = Minesweeper.Properties.Resources.mine;
                     bg = Image.FromHbitmap(mineBG.GetHbitmap());
                     break;
+                case (int)TileState.NotMine:
+                    Bitmap notmineBG = Minesweeper.Properties.Resources.mineCross;
+                    bg = Image.FromHbitmap(notmineBG.GetHbitmap());
+                    break;
                 case (int)TileState.BlewUp:
                     Bitmap blewBG = Minesweeper.Properties.Resources.mineRed;
                     bg = Image.FromHbitmap(blewBG.GetHbitmap());
@@ -151,12 +156,6 @@ namespace Minesweeper {
         {
             base.OnClick(e);
             Minesweep.Instance.TileClick(this.x, this.y);
-        }
-
-        protected override void OnDoubleClick(EventArgs e)
-        {
-            base.OnDoubleClick(e);
-            Invalidate();
         }
     }
 }

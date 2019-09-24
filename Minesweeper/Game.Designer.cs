@@ -39,9 +39,8 @@
             // 
             this.label1.Location = new System.Drawing.Point(0, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(45, 45);
+            this.label1.Size = new System.Drawing.Size(93, 45);
             this.label1.Text = "label1";
-            this.label1.Visible = false;
             // 
             // gamePanel
             // 
@@ -66,6 +65,8 @@
             this.smileButton.Size = new System.Drawing.Size(42, 42);
             this.smileButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.smileButton.Click += new System.EventHandler(this.smileButton_Click);
+            this.smileButton.MouseDown += new System.Windows.Forms.MouseEventHandler(this.smileButton_MouseDown);
+            this.smileButton.MouseUp += new System.Windows.Forms.MouseEventHandler(this.smileButton_MouseUp);
             // 
             // Game
             // 

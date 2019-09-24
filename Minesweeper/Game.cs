@@ -16,6 +16,7 @@ namespace Minesweeper
         public Panel boardPanel;
         public Label debugLabel;
         public PictureBox smileBtn;
+        public Image smileImg;
 
         public Game(int difficulty)
         {
@@ -23,6 +24,7 @@ namespace Minesweeper
             boardPanel = this.gamePanel;
             debugLabel = this.label1;
             smileBtn = this.smileButton;
+            smileImg = smileBtn.Image;
             mineRef = new Minesweep(this, difficulty);
         }
 
@@ -31,9 +33,25 @@ namespace Minesweeper
             mineRef.FlagBtnClick((PictureBox)sender);
         }
 
+        public void ChangeSmile(Image img)
+        {
+            smileImg = img;
+            smileBtn.Image = img;
+        }
+
         private void smileButton_Click(object sender, EventArgs e)
         {
             mineRef.SmileClick((PictureBox)sender);
+        }
+
+        private void smileButton_MouseDown(object sender, MouseEventArgs e)
+        {
+            smileBtn.Image = Properties.Resources.smileClicked;
+        }
+
+        private void smileButton_MouseUp(object sender, MouseEventArgs e)
+        {
+            smileBtn.Image = smileImg;
         }
     }
 }
