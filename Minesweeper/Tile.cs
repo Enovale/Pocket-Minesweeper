@@ -66,9 +66,9 @@ namespace Minesweeper {
             return array;
         }
 
-        protected override void OnPaint(PaintEventArgs e)
+        protected override void OnPaintBackground(PaintEventArgs e)
         {
-            base.OnPaint(e);
+            //base.OnPaint(e);
 
             // Create rectangle for source image.
             Rectangle srcRect = new Rectangle(0, 0, this.Size.Width, this.Size.Height);

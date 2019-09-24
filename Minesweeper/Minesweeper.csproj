@@ -56,6 +56,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BetterRandom.cs" />
     <Compile Include="TileStates.cs" />
     <Compile Include="Difficulty.cs" />
     <Compile Include="Menu.cs">

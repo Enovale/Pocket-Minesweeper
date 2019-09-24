@@ -6,6 +6,7 @@ using System.Data;
 using System.Windows.Forms;
 using System.Drawing;
 using Minesweeper;
+using BetterRandom;
 
 public class Minesweep
 {
@@ -67,12 +68,12 @@ public class Minesweep
         AddBombs(bombAmount);
         this.emptyLeft = 0;
         DetermineEmptyLeft();
-        gameForm.debugLabel.Text = emptyLeft.ToString();
+        gameForm.debugLabel.Text = this.bombs.ToString();
 	}
 
     public int RandomNumber(int min, int max)
     {
-        return random.Next(min, max);
+        return BetterRandom.RandomNumber.Between(min, max);
     }  
 
     public void InitGameGrid(int width, int height)
@@ -119,8 +120,8 @@ public class Minesweep
     {
         for (int i = 0; i <= amount - 1; i++)
         {
-            int randX = RandomNumber(0, gameWidth);
-            int randY = RandomNumber(0, gameHeight);
+            int randX = BetterRandom.RandomNumber.Between(0, gameWidth - 1);
+            int randY = BetterRandom.RandomNumber.Between(0, gameHeight - 1);
             if (!(tileArray[randX, randY].bomb))
             {
                 tileArray[randX, randY].bomb = true;
@@ -147,8 +148,8 @@ public class Minesweep
     {
         tileArray[x, y].state = (int)TileState.Empty;
         tileArray[x, y].bomb = false;
-        int randX = RandomNumber(0, gameWidth);
-        int randY = RandomNumber(0, gameHeight);
+        int randX = RandomNumber(0, gameWidth-1);
+        int randY = RandomNumber(0, gameHeight-1);
         tileArray[randX, randY].Invalidate();
         tileArray[x, y].Invalidate();
         if (!(tileArray[randX, randY].bomb))
@@ -235,12 +236,14 @@ public class Minesweep
             {
                 case (int)TileState.Empty:
                     tileObj.state = (int)TileState.Flagged;
+                    bombs--;
                     break;
                 case (int)TileState.Flagged:
                     tileObj.state = (int)TileState.Question;
                     break;
                 case (int)TileState.Question:
                     tileObj.state = (int)TileState.Empty;
+                    bombs++;
                     break;
                 default:
                     break;
@@ -275,6 +278,7 @@ public class Minesweep
             }
         }
         DetermineEmptyLeft();
+        gameForm.debugLabel.Text = this.bombs.ToString();
         if (emptyLeft <= 0)
         {
             Win();
@@ -340,7 +344,6 @@ public class Minesweep
                 }
             }
         }
-        gameForm.debugLabel.Text = this.emptyLeft.ToString();
     }
 
     public void Win()
