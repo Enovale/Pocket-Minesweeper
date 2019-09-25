@@ -322,7 +322,7 @@ public class Minesweep
         {
             for (int x = 0; x <= gameWidth; x++)
             {
-                if (tileArray[x, y].bomb)
+                if (tileArray[x, y].bomb && tileArray[x,y].state != (int)TileState.Flagged)
                 {
                     tileArray[x, y].state = (int)TileState.Flagged;
                     tileArray[x, y].Invalidate();
