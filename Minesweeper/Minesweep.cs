@@ -30,7 +30,7 @@ public class Minesweep
     public int tileWidth = 20;
     public int tileHeight = 20;
 
-	public Minesweep(Game form, int difficulty)
+	public Minesweep(Game form, int difficulty, int customWidth, int customHeight, int customBombs)
 	{
         gameForm = form;
         Instance = this;
@@ -55,15 +55,26 @@ public class Minesweep
                 gridY = 17;
                 bombAmount = 70;
                 break;
+            case (int)Difficulty.Custom:
+                gridX = customWidth;
+                gridY = customHeight;
+                bombAmount = customBombs;
+                break;
             default:
                 gridX = 9;
                 gridY = 9;
                 bombAmount = 10;
                 break;
         }
-        tileWidth = Convert.ToInt32((gameForm.ClientSize.Width - 3) / gridX);
-        tileHeight = tileWidth;
         InitGameGrid(gridX, gridY);
+        // Resize buttons if grid is too big
+        if (gameForm.boardPanel.Top < (3 + gameForm.smileBtn.Size.Height))
+        {
+            gameForm.smileBtn.Size = new Size(26, 26);
+            gameForm.smileBtn.Left = 107;
+            gameForm.flagBtn.Size = new Size(26, 26);
+            gameForm.flagBtn.Left = 208;
+        }
         this.bombs = bombAmount;
         AddBombs(bombAmount);
         this.emptyLeft = 0;
@@ -78,35 +89,32 @@ public class Minesweep
 
     public void InitGameGrid(int width, int height)
     {
-        tileArray = new Tile[width + 1, height + 1];
+        tileArray = new Tile[width, height];
+        tileWidth = Convert.ToInt32(Math.Floor((gameForm.ClientSize.Width) / width));
+        tileHeight = tileWidth;
         gameWidth = width;
         gameHeight = height;
-        for (int y = 0; y <= height; y++)
+        gameForm.boardPanel.Anchor = AnchorStyles.None;
+        gameForm.boardPanel.Size = new Size((width) * tileWidth, (height) * tileHeight);
+        gameForm.boardPanel.Left = (gameForm.ClientSize.Width / 2) - (gameForm.boardPanel.Width / 2);
+        gameForm.boardPanel.Top = (gameForm.ClientSize.Height - 3) - (gameForm.boardPanel.Size.Height);
+        if (gameForm.boardPanel.Left < 0)
         {
-            for (int x = 0; x <= width; x++)
+            gameForm.boardPanel.Left = 0;
+        }
+        if (gameForm.boardPanel.Top < 0)
+        {
+            gameForm.boardPanel.Top = 0;
+        }
+        for (int y = 0; y < height; y++)
+        {
+            for (int x = 0; x < width; x++)
             {
                 Tile tileObj = new Tile(false, x, y);
                 tileArray[x,y] = tileObj;
                 RenderToGameGrid(tileObj);
             }
         }
-        gameForm.boardPanel.Size = new Size(width * tileWidth, height * tileHeight);
-        gameForm.boardPanel.Left = (gameForm.ClientSize.Width - gameForm.boardPanel.Width) / 2;
-        gameForm.boardPanel.Top = (gameForm.ClientSize.Height - (height * tileHeight)) - 5;
-    }
-
-    public void RedrawGameGrid()
-    {
-        for (int y = 0; y <= gameHeight; y++)
-        {
-            for (int x = 0; x <= gameWidth; x++)
-            {
-                tileArray[x, y].Invalidate();
-            }
-        }
-        gameForm.boardPanel.Size = new Size(gameWidth * tileWidth, gameHeight * tileHeight);
-        gameForm.boardPanel.Left = (gameForm.ClientSize.Width - gameForm.boardPanel.Width) / 2;
-        gameForm.boardPanel.Top = (gameForm.ClientSize.Height - (gameHeight * tileHeight)) - 5;
     }
 
     public void RenderToGameGrid(Tile tile)
@@ -118,7 +126,7 @@ public class Minesweep
 
     public void AddBombs(int amount)
     {
-        for (int i = 0; i <= amount - 1; i++)
+        for (int i = 0; i < amount; i++)
         {
             int randX = BetterRandom.RandomNumber.Between(0, gameWidth - 1);
             int randY = BetterRandom.RandomNumber.Between(0, gameHeight - 1);
@@ -135,9 +143,9 @@ public class Minesweep
 
     public void CalcValues()
     {
-        for (int y = 0; y <= gameHeight; y++)
+        for (int y = 0; y < gameHeight; y++)
         {
-            for (int x = 0; x <= gameWidth; x++)
+            for (int x = 0; x < gameWidth; x++)
             {
                 tileArray[x, y].DetermineValue();
             }
@@ -298,9 +306,9 @@ public class Minesweep
 
     public void RevealBombs()
     {
-        for (int y = 0; y <= gameHeight; y++)
+        for (int y = 0; y < gameHeight; y++)
         {
-            for (int x = 0; x <= gameWidth; x++)
+            for (int x = 0; x < gameWidth; x++)
             {
                 if (tileArray[x, y].bomb && tileArray[x,y].state != (int)TileState.BlewUp)
                 {
@@ -318,9 +326,9 @@ public class Minesweep
 
     public void FlagAll()
     {
-        for (int y = 0; y <= gameHeight; y++)
+        for (int y = 0; y < gameHeight; y++)
         {
-            for (int x = 0; x <= gameWidth; x++)
+            for (int x = 0; x < gameWidth; x++)
             {
                 if (tileArray[x, y].bomb && tileArray[x,y].state != (int)TileState.Flagged)
                 {

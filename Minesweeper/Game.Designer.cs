@@ -60,7 +60,7 @@
             // smileButton
             // 
             this.smileButton.Image = ((System.Drawing.Image)(resources.GetObject("smileButton.Image")));
-            this.smileButton.Location = new System.Drawing.Point(99, 3);
+            this.smileButton.Location = new System.Drawing.Point(94, 3);
             this.smileButton.Name = "smileButton";
             this.smileButton.Size = new System.Drawing.Size(42, 42);
             this.smileButton.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;

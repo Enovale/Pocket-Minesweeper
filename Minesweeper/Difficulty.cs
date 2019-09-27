@@ -6,6 +6,7 @@ namespace Minesweeper
     {
         Beginner = 0,
         Intermediate = 1,
-        Advanced = 2
+        Advanced = 2,
+        Custom = 3
     }
 }
