@@ -61,7 +61,7 @@
             this.difficultyBox.Items.Add("Custom");
             this.difficultyBox.Location = new System.Drawing.Point(70, 225);
             this.difficultyBox.Name = "difficultyBox";
-            this.difficultyBox.Size = new System.Drawing.Size(100, 22);
+            this.difficultyBox.Size = new System.Drawing.Size(100, 26);
             this.difficultyBox.TabIndex = 1;
             // 
             // logoLabel
@@ -84,13 +84,13 @@
             this.customPanel.Controls.Add(this.customWidthField);
             this.customPanel.Location = new System.Drawing.Point(39, 73);
             this.customPanel.Name = "customPanel";
-            this.customPanel.Size = new System.Drawing.Size(170, 97);
+            this.customPanel.Size = new System.Drawing.Size(170, 98);
             // 
             // customBombsField
             // 
             this.customBombsField.Location = new System.Drawing.Point(91, 75);
             this.customBombsField.Name = "customBombsField";
-            this.customBombsField.Size = new System.Drawing.Size(79, 22);
+            this.customBombsField.Size = new System.Drawing.Size(79, 26);
             this.customBombsField.TabIndex = 7;
             this.customBombsField.Value = new decimal(new int[] {
             10,
@@ -118,7 +118,7 @@
             // 
             this.customHeightField.Location = new System.Drawing.Point(91, 49);
             this.customHeightField.Name = "customHeightField";
-            this.customHeightField.Size = new System.Drawing.Size(79, 22);
+            this.customHeightField.Size = new System.Drawing.Size(79, 26);
             this.customHeightField.TabIndex = 3;
             this.customHeightField.Value = new decimal(new int[] {
             9,
@@ -146,7 +146,7 @@
             // 
             this.customWidthField.Location = new System.Drawing.Point(91, 23);
             this.customWidthField.Name = "customWidthField";
-            this.customWidthField.Size = new System.Drawing.Size(79, 22);
+            this.customWidthField.Size = new System.Drawing.Size(79, 26);
             this.customWidthField.TabIndex = 0;
             this.customWidthField.Value = new decimal(new int[] {
             9,
@@ -160,11 +160,12 @@
             // 
             // helpButton
             // 
-            this.helpButton.Location = new System.Drawing.Point(187, 225);
+            this.helpButton.Location = new System.Drawing.Point(176, 225);
             this.helpButton.Name = "helpButton";
-            this.helpButton.Size = new System.Drawing.Size(22, 22);
+            this.helpButton.Size = new System.Drawing.Size(26, 26);
             this.helpButton.TabIndex = 3;
             this.helpButton.Text = "?";
+            this.helpButton.Click += new System.EventHandler(this.helpButton_Click);
             // 
             // Menu
             // 

@@ -57,5 +57,11 @@ namespace Minesweeper
         {
             menu.RunGame();
         }
+
+        private void helpButton_Click(object sender, EventArgs e)
+        {
+            Help form = new Help();
+            form.Show();
+        }
     }
 }

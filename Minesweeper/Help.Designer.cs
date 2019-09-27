@@ -1,6 +1,6 @@
 ﻿namespace Minesweeper
 {
-    partial class Menu
+    partial class Help
     {
         /// <summary>
         /// Required designer variable.
@@ -57,7 +57,6 @@
             this.KeyPreview = true;
             this.Name = "Menu";
             this.Text = "Minesweeper";
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Menu_KeyDown);
             this.ResumeLayout(false);
 
         }
